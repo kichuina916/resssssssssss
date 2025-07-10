@@ -244,6 +244,7 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .dashboard-header {
@@ -311,14 +312,16 @@ body {
 .content-area {
   flex: 1;
   padding: 30px;
+  width: 100%;
 }
 
-/* Enhanced Overview Grid */
+/* Enhanced Overview Grid - Fixed Layout */
 .overview-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 25px;
   margin-bottom: 40px;
+  width: 100%;
 }
 
 .stat-card {
@@ -370,6 +373,7 @@ body {
   font-size: 1rem;
   margin-bottom: 10px;
   font-weight: 600;
+  text-align: center;
 }
 
 .stat-value {
@@ -377,6 +381,7 @@ body {
   font-weight: 700;
   color: #2c3e50;
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .sales-breakdown,
@@ -409,22 +414,8 @@ body {
   font-weight: 600;
 }
 
-.stat-change {
-  font-size: 0.85rem;
-  padding: 4px 12px;
-  border-radius: 15px;
-  font-weight: 600;
-}
 
-.stat-change.positive {
-  background: #d4edda;
-  color: #155724;
-}
 
-.stat-change.neutral {
-  background: #e2e3e5;
-  color: #6c757d;
-}
 
 /* Enhanced Recent Orders */
 .recent-orders {
@@ -432,6 +423,7 @@ body {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .recent-orders h2 {
@@ -508,7 +500,7 @@ body {
   color: #0c5460;
 }
 
-.print-btn {
+.checkout-btn {
   background: #6c757d;
   color: white;
   border: none;
@@ -523,7 +515,7 @@ body {
   gap: 5px;
 }
 
-.print-btn:hover {
+.checkout-btn:hover {
   background: #5a6268;
   transform: translateY(-2px);
 }
@@ -859,7 +851,7 @@ body {
   color: white;
 }
 
-.print-invoice:hover {
+.checkout-invoice:hover {
   background: #5a6268;
 }
 

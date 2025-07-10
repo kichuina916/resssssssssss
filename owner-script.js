@@ -67,6 +67,9 @@ function loadPageContent(page) {
       contentArea.innerHTML = getOrdersContent()
       initializeOrdersPage()
       break
+    case "expense":
+      contentArea.innerHTML = getExpenseContent()
+      break
     case "checkout":
       window.location.href = "checkout-page.html"
       break
@@ -75,6 +78,25 @@ function loadPageContent(page) {
   }
 }
 
+function getExpenseContent() {
+  return `
+    <div class="expense-management">
+      <div class="coming-soon-container">
+        <div class="coming-soon-content">
+          <div class="coming-soon-icon">🚧</div>
+          <h2>Expense Management</h2>
+          <p>This feature is coming soon!</p>
+          <div class="coming-soon-features">
+            <div class="feature-item">📊 Track daily expenses</div>
+            <div class="feature-item">💰 Budget management</div>
+            <div class="feature-item">📈 Expense analytics</div>
+            <div class="feature-item">🧾 Receipt management</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  `
+}
 // Sample data for calculations
 const todaysSales = {
   dineIn: 28450,
@@ -113,7 +135,6 @@ function getOverviewContent() {
                             <span class="breakdown-value">¥${todaysSales.takeout.toLocaleString()}</span>
                         </div>
                     </div>
-                    <span class="stat-change positive">+12.5%</span>
                 </div>
             </div>
             
@@ -132,7 +153,6 @@ function getOverviewContent() {
                             <span class="breakdown-value">${todaysOrders.takeout}</span>
                         </div>
                     </div>
-                    <span class="stat-change positive">+8.3%</span>
                 </div>
             </div>
             
@@ -141,7 +161,6 @@ function getOverviewContent() {
                 <div class="stat-info">
                     <h3>Active Tables</h3>
                     <p class="stat-value">18/25</p>
-                    <span class="stat-change neutral">72% occupied</span>
                 </div>
             </div>
             
@@ -160,7 +179,6 @@ function getOverviewContent() {
                             <span class="breakdown-value">¥${cashRegister.totalSales.toLocaleString()}</span>
                         </div>
                     </div>
-                    <span class="stat-change positive">Available</span>
                 </div>
             </div>
         </div>
@@ -175,7 +193,7 @@ function getOverviewContent() {
                         <span>Items</span>
                         <span>Total</span>
                         <span>Status</span>
-                        <span>Print Invoice</span>
+                        <span>Checkout</span>
                     </div>
                     <div class="order-row">
                         <span class="order-id">#ORD001</span>
@@ -184,7 +202,7 @@ function getOverviewContent() {
                         <span class="order-total">¥4,090</span>
                         <span class="status preparing">Preparing</span>
                         <span class="print-action">
-                            <button class="print-btn" onclick="printInvoice('ORD001')">🖨️ Print</button>
+                            <button class="checkout-btn" onclick="printInvoice('ORD001')">💳 Checkout</button>
                         </span>
                     </div>
                     <div class="order-row">
@@ -194,7 +212,7 @@ function getOverviewContent() {
                         <span class="order-total">¥1,550</span>
                         <span class="status ready">Ready</span>
                         <span class="print-action">
-                            <button class="print-btn" onclick="printInvoice('ORD002')">🖨️ Print</button>
+                            <button class="checkout-btn" onclick="printInvoice('ORD002')">💳 Checkout</button>
                         </span>
                     </div>
                     <div class="order-row">
@@ -204,7 +222,7 @@ function getOverviewContent() {
                         <span class="order-total">¥3,200</span>
                         <span class="status completed">Completed</span>
                         <span class="print-action">
-                            <button class="print-btn" onclick="printInvoice('ORD003')">🖨️ Print</button>
+                            <button class="checkout-btn" onclick="printInvoice('ORD003')">💳 Checkout</button>
                         </span>
                     </div>
                 </div>
@@ -383,8 +401,8 @@ function getOrderActions(order) {
         <button class="action-btn start-preparing" onclick="updateOrderStatus('${order.id}', 'preparing')">
           👨‍🍳 Start Preparing
         </button>
-        <button class="action-btn print-invoice" onclick="printInvoice('${order.id}')">
-          🖨️ Print
+        <button class="action-btn checkout-invoice" onclick="printInvoice('${order.id}')">
+          💳 Checkout
         </button>
       `
     case 'preparing':
@@ -392,8 +410,8 @@ function getOrderActions(order) {
         <button class="action-btn mark-ready" onclick="updateOrderStatus('${order.id}', 'ready')">
           ✅ Mark Ready
         </button>
-        <button class="action-btn print-invoice" onclick="printInvoice('${order.id}')">
-          🖨️ Print
+        <button class="action-btn checkout-invoice" onclick="printInvoice('${order.id}')">
+          💳 Checkout
         </button>
       `
     case 'ready':
@@ -401,14 +419,14 @@ function getOrderActions(order) {
         <button class="action-btn complete-order" onclick="updateOrderStatus('${order.id}', 'completed')">
           🎉 Complete
         </button>
-        <button class="action-btn print-invoice" onclick="printInvoice('${order.id}')">
-          🖨️ Print
+        <button class="action-btn checkout-invoice" onclick="printInvoice('${order.id}')">
+          💳 Checkout
         </button>
       `
     case 'completed':
       return `
-        <button class="action-btn print-invoice" onclick="printInvoice('${order.id}')">
-          🖨️ Print
+        <button class="action-btn checkout-invoice" onclick="printInvoice('${order.id}')">
+          💳 Checkout
         </button>
       `
     default:

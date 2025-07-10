@@ -62,7 +62,60 @@ const orderDatabase = {
   }
 }
 
+// Global language selector functions
+let languageDropdownOpen = false
+
+function toggleLanguageDropdown() {
+  const dropdown = document.getElementById('languageDropdown')
+  languageDropdownOpen = !languageDropdownOpen
+  
+  if (languageDropdownOpen) {
+    dropdown.classList.add('show')
+  } else {
+    dropdown.classList.remove('show')
+  }
+}
+
+function selectLanguageGlobal(lang) {
+  updateGlobalLanguageDisplay(lang)
+  
+  // Close dropdown
+  document.getElementById('languageDropdown').classList.remove('show')
+  languageDropdownOpen = false
+  
+  // Update active state
+  document.querySelectorAll('.language-option').forEach(option => {
+    option.classList.remove('active')
+  })
+  event.target.closest('.language-option').classList.add('active')
+}
+
+function updateGlobalLanguageDisplay(lang = 'en') {
+  const flagElement = document.getElementById('currentFlag')
+  const langElement = document.getElementById('currentLang')
+  
+  if (lang === 'en') {
+    flagElement.textContent = '🇺🇸'
+    langElement.textContent = 'English'
+  } else {
+    flagElement.textContent = '🇯🇵'
+    langElement.textContent = '日本語'
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+  const languageSelector = document.querySelector('.language-selector')
+  if (!languageSelector.contains(event.target) && languageDropdownOpen) {
+    document.getElementById('languageDropdown').classList.remove('show')
+    languageDropdownOpen = false
+  }
+})
+
 window.onload = () => {
+  // Initialize global language selector
+  updateGlobalLanguageDisplay()
+  
   const orderNumber = localStorage.getItem("orderNumber")
   const orderData = JSON.parse(localStorage.getItem("orderData") || "[]")
   const orderType = localStorage.getItem("orderType")

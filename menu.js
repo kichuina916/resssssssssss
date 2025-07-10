@@ -1,6 +1,6 @@
 let cart = []
-const savedForLater = []
 let currentCategory = "ramen"
+let languageDropdownOpen = false
 
 // Enhanced Menu data with ratings, badges, and dietary info
 const menuData = {
@@ -428,32 +428,56 @@ function updateItemQuantity(itemId, change) {
   updateCartCount()
 }
 
+// Global language selector functions
+function toggleLanguageDropdown() {
+  const dropdown = document.getElementById('languageDropdown')
+  languageDropdownOpen = !languageDropdownOpen
+  
+  if (languageDropdownOpen) {
+    dropdown.classList.add('show')
+  } else {
+    dropdown.classList.remove('show')
+  }
+}
+
+function selectLanguageGlobal(lang) {
+  updateGlobalLanguageDisplay(lang)
+  
+  // Close dropdown
+  document.getElementById('languageDropdown').classList.remove('show')
+  languageDropdownOpen = false
+  
+  // Update active state
+  document.querySelectorAll('.language-option').forEach(option => {
+    option.classList.remove('active')
+  })
+  event.target.closest('.language-option').classList.add('active')
+}
+
+function updateGlobalLanguageDisplay(lang = 'en') {
+  const flagElement = document.getElementById('currentFlag')
+  const langElement = document.getElementById('currentLang')
+  
+  if (lang === 'en') {
+    flagElement.textContent = '🇺🇸'
+    langElement.textContent = 'English'
+  } else {
+    flagElement.textContent = '🇯🇵'
+    langElement.textContent = '日本語'
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+  const languageSelector = document.querySelector('.language-selector')
+  if (!languageSelector.contains(event.target) && languageDropdownOpen) {
+    document.getElementById('languageDropdown').classList.remove('show')
+    languageDropdownOpen = false
+  }
+})
+
 function addToCart(itemId) {
   updateItemQuantity(itemId, 1)
-}
-
-function saveForLater(itemId) {
-  const cartItemIndex = cart.findIndex((item) => item.id === itemId)
-  if (cartItemIndex !== -1) {
-    const item = cart[cartItemIndex]
-    savedForLater.push(item)
-    cart.splice(cartItemIndex, 1)
-    updateCartCount()
-    displayCartItems()
-    showNotification("Item saved for later!")
-  }
-}
-
-function moveToCart(itemId) {
-  const savedItemIndex = savedForLater.findIndex((item) => item.id === itemId)
-  if (savedItemIndex !== -1) {
-    const item = savedForLater[savedItemIndex]
-    cart.push(item)
-    savedForLater.splice(savedItemIndex, 1)
-    updateCartCount()
-    displayCartItems()
-    showNotification("Item moved to cart!")
-  }
 }
 
 function quickRemoveFromCart(itemId) {
@@ -490,7 +514,7 @@ function displayCartItems() {
   const cartItems = document.getElementById("cartItems")
   const cartTotal = document.getElementById("cartTotal")
 
-  if (cart.length === 0 && savedForLater.length === 0) {
+  if (cart.length === 0) {
     cartItems.innerHTML = "<p>Your cart is empty</p>"
     cartTotal.textContent = "0"
     return
@@ -518,35 +542,12 @@ function displayCartItems() {
                   <span style="margin-left: 15px; font-weight: bold; color: #ff6b35;">¥${item.price * item.quantity}</span>
               </div>
               <div class="cart-item-actions">
-                <button class="save-later-btn" onclick="saveForLater(${item.id})" title="Save for later">💾</button>
                 <button class="quick-remove-btn" onclick="quickRemoveFromCart(${item.id})" title="Remove">🗑️</button>
               </div>
           </div>
       `,
       )
       .join("")
-  }
-
-  if (savedForLater.length > 0) {
-    cartHTML += `
-      <div class="saved-for-later-section">
-        <h3>Saved for Later</h3>
-        ${savedForLater
-          .map(
-            (item) => `
-          <div class="saved-item">
-            <img src="${item.image}" alt="${item.name}" class="saved-item-image">
-            <div class="saved-item-info">
-              <h4>${item.name}</h4>
-              <p>¥${item.price}</p>
-            </div>
-            <button class="move-to-cart-btn" onclick="moveToCart(${item.id})">Move to Cart</button>
-          </div>
-        `,
-          )
-          .join("")}
-      </div>
-    `
   }
 
   cartItems.innerHTML = cartHTML
@@ -696,13 +697,22 @@ window.onload = () => {
   const orderType = localStorage.getItem("orderType")
   const selectedTable = localStorage.getItem("selectedTable")
   
+  // Initialize global language selector
+  updateGlobalLanguageDisplay()
+  
   if (orderType) {
     const orderInfo = document.createElement("div")
     orderInfo.className = "order-info-banner"
+    
+    // Only show table info for dine-in orders
+    const tableInfoHtml = (orderType === 'dine-in' && selectedTable) 
+      ? `<span class="table-info">Table ${selectedTable}</span>` 
+      : ''
+    
     orderInfo.innerHTML = `
       <div class="order-info-content">
         <span class="order-type">${orderType === 'dine-in' ? '🍽️ Dine In' : '🥡 Takeout'}</span>
-        ${selectedTable ? `<span class="table-info">Table ${selectedTable}</span>` : ''}
+        ${tableInfoHtml}
       </div>
     `
     document.querySelector('.menu-container').prepend(orderInfo)
