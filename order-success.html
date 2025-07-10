@@ -9,6 +9,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="light">
+    <!-- Global Language Selector -->
+    <div class="language-selector" onclick="toggleLanguageDropdown()">
+        <span class="flag" id="currentFlag">🇺🇸</span>
+        <span class="lang-text" id="currentLang">English</span>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option active" onclick="selectLanguageGlobal('en')">
+                <span class="flag">🇺🇸</span>
+                <span>English</span>
+            </div>
+            <div class="language-option" onclick="selectLanguageGlobal('ja')">
+                <span class="flag">🇯🇵</span>
+                <span>日本語</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Dark Mode Toggle -->
     <div class="success-container">
         <div class="success-content">
@@ -38,7 +54,7 @@
     <!-- Order History Modal -->
     <div id="orderHistoryModal" class="modal hidden">
         <div class="modal-content order-history-modal">
-            <span class="close" onclick="closeOrderHistory()">&times;</span>
+            <button class="close" onclick="closeOrderHistory()">×</button>
             <h2 id="orderHistoryTitle">Order History</h2>
             <div class="order-search">
                 <div class="search-input-container">

@@ -9,6 +9,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="light">
+    <!-- Global Language Selector -->
+    <div class="language-selector" onclick="toggleLanguageDropdown()">
+        <span class="flag" id="currentFlag">🇺🇸</span>
+        <span class="lang-text" id="currentLang">English</span>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option active" onclick="selectLanguageGlobal('en')">
+                <span class="flag">🇺🇸</span>
+                <span>English</span>
+            </div>
+            <div class="language-option" onclick="selectLanguageGlobal('ja')">
+                <span class="flag">🇯🇵</span>
+                <span>日本語</span>
+            </div>
+        </div>
+    </div>
+
     <div class="menu-container">
         <!-- Category Navigation -->
         <nav class="category-nav">
@@ -79,7 +95,7 @@
     <!-- Cart Modal -->
     <div id="cartModal" class="modal hidden">
         <div class="modal-content cart-modal">
-            <span class="close" onclick="closeCart()">&times;</span>
+            <button class="close" onclick="closeCart()">×</button>
             <h2 id="cartTitle">Your Order</h2>
             <div id="cartItems" class="cart-items"></div>
             <div class="cart-total">
@@ -92,8 +108,15 @@
     <!-- Confirmation Modal -->
     <div id="confirmModal" class="modal hidden">
         <div class="modal-content confirm-modal">
-            <h2>Are you sure?</h2>
-            <p>Do you want to place this order?</p>
+            <button class="close" onclick="closeConfirm()">×</button>
+            <div class="confirm-modal-header">
+                <div class="confirm-modal-icon">🛒</div>
+                <h2>Confirm Your Order</h2>
+            </div>
+            <div class="confirm-modal-body">
+                <p>Are you ready to place this delicious order?</p>
+                <p>Your food will be prepared with care and served fresh!</p>
+            </div>
             <div class="confirm-buttons">
                 <button class="confirm-btn" onclick="placeOrder()">Yes, Place Order</button>
                 <button class="cancel-btn" onclick="closeConfirm()">Cancel</button>

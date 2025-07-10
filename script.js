@@ -1,6 +1,7 @@
 let currentLanguage = "en"
 let selectedOrderType = null
 let selectedTable = null
+let languageDropdownOpen = false
 
 const translations = {
   en: {
@@ -31,8 +32,59 @@ const tableStatus = {
   6: true, 7: true, 8: false, 9: true, 10: true
 }
 
+// Global language selector functions
+function toggleLanguageDropdown() {
+  const dropdown = document.getElementById('languageDropdown')
+  languageDropdownOpen = !languageDropdownOpen
+  
+  if (languageDropdownOpen) {
+    dropdown.classList.add('show')
+  } else {
+    dropdown.classList.remove('show')
+  }
+}
+
+function selectLanguageGlobal(lang) {
+  currentLanguage = lang
+  updateGlobalLanguageDisplay()
+  updateLanguage()
+  
+  // Close dropdown
+  document.getElementById('languageDropdown').classList.remove('show')
+  languageDropdownOpen = false
+  
+  // Update active state
+  document.querySelectorAll('.language-option').forEach(option => {
+    option.classList.remove('active')
+  })
+  event.target.closest('.language-option').classList.add('active')
+}
+
+function updateGlobalLanguageDisplay() {
+  const flagElement = document.getElementById('currentFlag')
+  const langElement = document.getElementById('currentLang')
+  
+  if (currentLanguage === 'en') {
+    flagElement.textContent = '🇺🇸'
+    langElement.textContent = 'English'
+  } else {
+    flagElement.textContent = '🇯🇵'
+    langElement.textContent = '日本語'
+  }
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+  const languageSelector = document.querySelector('.language-selector')
+  if (!languageSelector.contains(event.target) && languageDropdownOpen) {
+    document.getElementById('languageDropdown').classList.remove('show')
+    languageDropdownOpen = false
+  }
+})
+
 function selectLanguage(lang) {
   currentLanguage = lang
+  updateGlobalLanguageDisplay()
   updateLanguage()
   document.getElementById("languageModal").classList.add("hidden")
   document.getElementById("mainContent").classList.remove("hidden")
@@ -113,5 +165,8 @@ function goToMenu() {
 
 // Initialize the page
 window.onload = () => {
+  // Initialize global language selector
+  updateGlobalLanguageDisplay()
+  
   document.getElementById("languageModal").classList.remove("hidden")
 }

@@ -17,6 +17,22 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body data-theme="light">
+    <!-- Global Language Selector -->
+    <div class="language-selector" onclick="toggleLanguageDropdown()">
+        <span class="flag" id="currentFlag">🇺🇸</span>
+        <span class="lang-text" id="currentLang">English</span>
+        <div class="language-dropdown" id="languageDropdown">
+            <div class="language-option active" onclick="selectLanguageGlobal('en')">
+                <span class="flag">🇺🇸</span>
+                <span>English</span>
+            </div>
+            <div class="language-option" onclick="selectLanguageGlobal('ja')">
+                <span class="flag">🇯🇵</span>
+                <span>日本語</span>
+            </div>
+        </div>
+    </div>
+
     <!-- Language Selection Modal -->
     <div id="languageModal" class="modal">
         <div class="modal-content language-modal">
@@ -110,6 +126,7 @@
     <div id="tableSelectionModal" class="modal hidden">
         <div class="modal-content">
             <span class="close" onclick="closeTableSelection()">&times;</span>
+            <button class="close" onclick="closeTableSelection()">×</button>
             <h2 id="tableSelectionTitle">Select Your Table</h2>
             <p class="table-subtitle">Please choose an available table number</p>
             <div class="table-grid">
