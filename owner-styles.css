@@ -311,14 +311,17 @@ body {
 .content-area {
   flex: 1;
   padding: 30px;
+  width: 100%;
+  max-width: 100%;
 }
 
 /* Enhanced Overview Grid */
 .overview-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 25px;
   margin-bottom: 40px;
+  width: 100%;
 }
 
 .stat-card {
@@ -331,6 +334,7 @@ body {
   gap: 20px;
   transition: all 0.3s ease;
   border-left: 5px solid transparent;
+  width: 100%;
 }
 
 .stat-card:hover {
@@ -363,6 +367,7 @@ body {
 
 .stat-info {
   flex: 1;
+  text-align: center;
 }
 
 .stat-info h3 {
@@ -377,6 +382,7 @@ body {
   font-weight: 700;
   color: #2c3e50;
   margin-bottom: 15px;
+  text-align: center;
 }
 
 .sales-breakdown,
@@ -432,6 +438,7 @@ body {
   padding: 30px;
   border-radius: 20px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  width: 100%;
 }
 
 .recent-orders h2 {
@@ -448,6 +455,7 @@ body {
 .orders-table {
   width: 100%;
   min-width: 800px;
+  table-layout: fixed;
 }
 
 .order-row {
@@ -457,6 +465,7 @@ body {
   padding: 20px 0;
   border-bottom: 1px solid #f0f0f0;
   align-items: center;
+  width: 100%;
 }
 
 .order-row.header {
@@ -524,6 +533,26 @@ body {
 }
 
 .print-btn:hover {
+  background: #5a6268;
+  transform: translateY(-2px);
+}
+
+.checkout-btn {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.checkout-btn:hover {
   background: #5a6268;
   transform: translateY(-2px);
 }
@@ -2060,6 +2089,7 @@ body {
 
   .overview-grid {
     grid-template-columns: 1fr;
+    gap: 15px;
   }
 
   .orders-grid {
@@ -2083,5 +2113,31 @@ body {
 
   .orders-table-container {
     overflow-x: scroll;
+  }
+
+  .stat-card {
+    padding: 20px;
+  }
+
+  .stat-icon {
+    font-size: 2rem;
+    padding: 15px;
+    min-width: 60px;
+  }
+
+  .stat-value {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .overview-grid {
+    grid-template-columns: 1fr;
   }
 }
