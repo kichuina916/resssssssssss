@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Restaurant POS</title>
+    <link rel="stylesheet" href="owner-styles.css">
+</head>
+<body class="checkout-body">
+    <div class="checkout-container">
+        <!-- Modern Header -->
+        <header class="modern-header">
+            <div class="header-brand">
+                <div class="brand-logo">🍜</div>
+                <div class="brand-info">
+                    <h1>HALAL WAGYU RAMEN OKUBO</h1>
+                    <p>PREMIUM HALAL DINING</p>
+                </div>
+            </div>
+            <div class="header-controls">
+                <div class="time-display" id="currentTime"></div>
+                <div class="search-box">
+                    <input type="text" placeholder="Search menu..." class="search-input">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <!-- Left Panel - Menu Items -->
+            <div class="menu-panel">
+                <div class="panel-header">
+                    <h2>Menu Items</h2>
+                    <div class="category-tabs">
+                        <button class="tab-btn active" onclick="filterCategory('all')">All</button>
+                        <button class="tab-btn" onclick="filterCategory('ramen')">Ramen</button>
+                        <button class="tab-btn" onclick="filterCategory('sides')">Sides</button>
+                        <button class="tab-btn" onclick="filterCategory('drinks')">Drinks</button>
+                    </div>
+                </div>
+
+                <div class="menu-items-grid">
+                    <div class="menu-card" data-category="ramen" onclick="addToOrder('MB Wagyu Ramen (L)', 1900)">
+                        <div class="card-image">
+                            <img src="https://halalwagyuramen.jp/storage/100/conversions/20211209-DSCF2063-thumb.jpg?height=120&width=200" alt="MB Wagyu Ramen">
+                            <div class="add-overlay">
+                                <span class="add-icon">+</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>MB Wagyu Ramen (L)</h3>
+                            <div class="price">¥1,900</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-card" data-category="ramen" onclick="addToOrder('Chicken Karaage Ramen', 1550)">
+                        <div class="card-image">
+                            <img src="https://halalwagyuramen.jp/storage/93/conversions/th-thumb.jpeg?height=120&width=200" alt="Chicken Karaage Ramen">
+                            <div class="add-overlay">
+                                <span class="add-icon">+</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Chicken Karaage Ramen</h3>
+                            <div class="price">¥1,550</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-card" data-category="sides" onclick="addToOrder('Sushi (60g)', 190)">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?w=200&h=120&fit=crop" alt="Sushi">
+                            <div class="add-overlay">
+                                <span class="add-icon">+</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Sushi (60g)</h3>
+                            <div class="price">¥190</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-card" data-category="ramen" onclick="addToOrder('Gold Premium A5 Set', 6600)">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?w=200&h=120&fit=crop" alt="Gold Premium A5 Set">
+                            <div class="add-overlay">
+                                <span class="add-icon">+</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Gold Premium A5 Set</h3>
+                            <div class="price">¥6,600</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-card" data-category="sides" onclick="addToOrder('Gyoza (6pcs)', 600)">
+                        <div class="card-image">
+                            <img src="https://halalwagyuramen.jp/storage/107/conversions/top_back2-thumb.jpg?height=120&width=200" alt="Gyoza">
+                            <div class="add-overlay">
+                                <span class="add-icon">+</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Gyoza (6pcs)</h3>
+                            <div class="price">¥600</div>
+                        </div>
+                    </div>
+
+                    <div class="menu-card" data-category="drinks" onclick="addToOrder('Green Tea', 300)">
+                        <div class="card-image">
+                            <img src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=200&h=120&fit=crop" alt="Green Tea">
+                            <div class="add-overlay">
+                                <span class="add-icon">+</span>
+                            </div>
+                        </div>
+                        <div class="card-content">
+                            <h3>Green Tea</h3>
+                            <div class="price">¥300</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Order Management -->
+            <div class="order-panel">
+                <!-- Recent Orders Section -->
+                <div class="recent-orders-section">
+                    <h3>Recent Orders</h3>
+                    <div class="recent-orders-container">
+                        <div class="recent-order">
+                            <div class="order-badge">#ORD001</div>
+                            <div class="order-info">
+                                <span class="table">Table 5</span>
+                                <span class="time">2:30 PM</span>
+                            </div>
+                            <div class="order-amount">¥4,090</div>
+                        </div>
+                        <div class="recent-order">
+                            <div class="order-badge">#ORD002</div>
+                            <div class="order-info">
+                                <span class="table">Table 12</span>
+                                <span class="time">2:45 PM</span>
+                            </div>
+                            <div class="order-amount">¥7,190</div>
+                        </div>
+                        <div class="recent-order">
+                            <div class="order-badge">#ORD003</div>
+                            <div class="order-info">
+                                <span class="table">Takeout</span>
+                                <span class="time">3:15 PM</span>
+                            </div>
+                            <div class="order-amount">¥3,200</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Order Section -->
+                <div class="current-order-section">
+                    <div class="order-title">
+                        <h3>Current Order</h3>
+                        <div class="order-number">
+                            Order #<span id="currentOrderNumber">ORD004</span>
+                        </div>
+                    </div>
+
+                    <div class="order-items-container" id="orderItemsContainer">
+                        <div class="empty-state">
+                            <div class="empty-icon">🛒</div>
+                            <p>Add items to start order</p>
+                        </div>
+                    </div>
+
+                    <!-- Discount Toggle -->
+                    <div class="discount-control">
+                        <div class="discount-info">
+                            <span class="discount-text">10% Discount</span>
+                            <span class="discount-desc">Apply discount to order</span>
+                        </div>
+                        <div class="modern-toggle" id="discountToggle" onclick="toggleDiscount()">
+                            <div class="toggle-track">
+                                <div class="toggle-thumb"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Order Summary -->
+                    <div class="order-summary">
+                        <div class="summary-row">
+                            <span>Subtotal</span>
+                            <span id="subtotalAmount">¥0</span>
+                        </div>
+                        <div class="summary-row discount-row" id="discountRow" style="display: none;">
+                            <span>Discount (10%)</span>
+                            <span id="discountAmount" class="discount-value">-¥0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Tax (10%)</span>
+                            <span id="taxAmount">¥0</span>
+                        </div>
+                        <div class="summary-row total-row">
+                            <span>Total</span>
+                            <span id="totalAmount">¥0</span>
+                        </div>
+                    </div>
+
+                    <!-- Payment Buttons -->
+                    <div class="payment-section">
+                        <button class="payment-button cash-payment" onclick="openCashPayment()">
+                            <div class="payment-icon">💵</div>
+                            <div class="payment-text">
+                                <span class="payment-title">Cash Payment</span>
+                                <span class="payment-subtitle">Pay with cash</span>
+                            </div>
+                        </button>
+                        <button class="payment-button card-payment" onclick="processCardPayment()">
+                            <div class="payment-icon">💳</div>
+                            <div class="payment-text">
+                                <span class="payment-title">Card/IC Card</span>
+                                <span class="payment-subtitle">Electronic payment</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enhanced Cash Payment Modal -->
+    <div id="cashPaymentModal" class="modal-backdrop">
+        <div class="cash-modal">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <div class="modal-icon">💵</div>
+                    <h2>Cash Payment</h2>
+                </div>
+                <button class="modal-close" onclick="closeCashPayment()">×</button>
+            </div>
+
+            <div class="payment-details">
+                <div class="detail-card">
+                    <div class="detail-label">Order Total</div>
+                    <div class="detail-value" id="modalOrderTotal">¥0</div>
+                </div>
+            </div>
+
+            <div class="cash-input-group">
+                <label class="input-label">Amount Received from Customer</label>
+                <div class="cash-input-container">
+                    <span class="currency-prefix">¥</span>
+                    <input type="number" id="cashReceived" class="cash-amount-input" placeholder="0" oninput="calculateChange()">
+                </div>
+            </div>
+
+            <div class="change-display-section" id="changeDisplaySection" style="display: none;">
+                <div class="change-card" id="changeCard">
+                    <div class="change-label">Change Amount</div>
+                    <div class="change-value" id="changeValue">¥0</div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button class="modal-button cancel-button" onclick="closeCashPayment()">
+                    Cancel
+                </button>
+                <button id="confirmPaymentBtn" class="modal-button confirm-button" onclick="confirmCashPayment()" disabled>
+                    Confirm Payment
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentOrder = [];
+        let orderCounter = 4;
+        let discountEnabled = false;
+        const taxRate = 0.10;
+        const discountRate = 0.10;
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { 
+                hour12: false, 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        // Filter menu categories
+        function filterCategory(category) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const menuCards = document.querySelectorAll('.menu-card');
+            menuCards.forEach(card => {
+                if (category === 'all' || card.dataset.category === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Add item to order with animation
+        function addToOrder(name, price) {
+            const existingItem = currentOrder.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                currentOrder.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            updateOrderDisplay();
+            showNotification(`${name} added to order`, 'success');
+        }
+
+        // Remove item from order
+        function removeFromOrder(index) {
+            const item = currentOrder[index];
+            currentOrder.splice(index, 1);
+            updateOrderDisplay();
+            showNotification(`${item.name} removed from order`, 'info');
+        }
+
+        // Update quantity
+        function updateQuantity(index, change) {
+            currentOrder[index].quantity += change;
+            if (currentOrder[index].quantity <= 0) {
+                removeFromOrder(index);
+            } else {
+                updateOrderDisplay();
+            }
+        }
+
+        // Update order display
+        function updateOrderDisplay() {
+            const container = document.getElementById('orderItemsContainer');
+            
+            if (currentOrder.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🛒</div>
+                        <p>Add items to start order</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = currentOrder.map((item, index) => `
+                    <div class="order-item">
+                        <div class="item-info">
+                            <div class="item-name">${item.name}</div>
+                            <div class="item-price">¥${item.price.toLocaleString()}</div>
+                        </div>
+                        <div class="item-controls">
+                            <div class="quantity-control">
+                                <button class="qty-btn minus" onclick="updateQuantity(${index}, -1)">−</button>
+                                <span class="qty-display">${item.quantity}</span>
+                                <button class="qty-btn plus" onclick="updateQuantity(${index}, 1)">+</button>
+                            </div>
+                            <div class="item-total">¥${(item.price * item.quantity).toLocaleString()}</div>
+                            <button class="remove-item" onclick="removeFromOrder(${index})">×</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            updateCalculations();
+        }
+
+        // Toggle discount
+        function toggleDiscount() {
+            const toggle = document.getElementById('discountToggle');
+            const discountRow = document.getElementById('discountRow');
+            
+            discountEnabled = !discountEnabled;
+            
+            if (discountEnabled) {
+                toggle.classList.add('active');
+                discountRow.style.display = 'flex';
+            } else {
+                toggle.classList.remove('active');
+                discountRow.style.display = 'none';
+            }
+            
+            updateCalculations();
+        }
+
+        // Update calculations
+        function updateCalculations() {
+            const subtotal = currentOrder.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let discountAmount = 0;
+            
+            if (discountEnabled) {
+                discountAmount = subtotal * discountRate;
+            }
+            
+            const afterDiscount = subtotal - discountAmount;
+            const taxAmount = afterDiscount * taxRate;
+            const total = afterDiscount + taxAmount;
+            
+            document.getElementById('subtotalAmount').textContent = `¥${subtotal.toLocaleString()}`;
+            document.getElementById('discountAmount').textContent = `-¥${Math.round(discountAmount).toLocaleString()}`;
+            document.getElementById('taxAmount').textContent = `¥${Math.round(taxAmount).toLocaleString()}`;
+            document.getElementById('totalAmount').textContent = `¥${Math.round(total).toLocaleString()}`;
+        }
+
+        // Open cash payment modal
+        function openCashPayment() {
+            if (currentOrder.length === 0) {
+                showNotification('Please add items to order first', 'error');
+                return;
+            }
+            
+            const total = getCurrentTotal();
+            document.getElementById('modalOrderTotal').textContent = `¥${total.toLocaleString()}`;
+            document.getElementById('cashPaymentModal').classList.add('show');
+            
+            // Focus input after animation
+            setTimeout(() => {
+                document.getElementById('cashReceived').focus();
+            }, 300);
+        }
+
+        // Close cash payment modal
+        function closeCashPayment() {
+            document.getElementById('cashPaymentModal').classList.remove('show');
+            document.getElementById('cashReceived').value = '';
+            document.getElementById('changeDisplaySection').style.display = 'none';
+            document.getElementById('confirmPaymentBtn').disabled = true;
+        }
+
+        // Calculate change
+        function calculateChange() {
+            const cashReceived = parseFloat(document.getElementById('cashReceived').value) || 0;
+            const orderTotal = getCurrentTotal();
+            const change = cashReceived - orderTotal;
+            
+            const changeSection = document.getElementById('changeDisplaySection');
+            const changeCard = document.getElementById('changeCard');
+            const changeValue = document.getElementById('changeValue');
+            const confirmBtn = document.getElementById('confirmPaymentBtn');
+            
+            if (cashReceived > 0) {
+                changeSection.style.display = 'block';
+                
+                if (change >= 0) {
+                    changeValue.textContent = `¥${change.toLocaleString()}`;
+                    changeCard.classList.remove('insufficient');
+                    confirmBtn.disabled = false;
+                } else {
+                    changeValue.textContent = `Need ¥${Math.abs(change).toLocaleString()} more`;
+                    changeCard.classList.add('insufficient');
+                    confirmBtn.disabled = true;
+                }
+            } else {
+                changeSection.style.display = 'none';
+                confirmBtn.disabled = true;
+            }
+        }
+
+        // Get current total
+        function getCurrentTotal() {
+            const subtotal = currentOrder.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            let discountAmount = 0;
+            
+            if (discountEnabled) {
+                discountAmount = subtotal * discountRate;
+            }
+            
+            const afterDiscount = subtotal - discountAmount;
+            const taxAmount = afterDiscount * taxRate;
+            return Math.round(afterDiscount + taxAmount);
+        }
+
+        // Confirm cash payment
+        function confirmCashPayment() {
+            const cashReceived = parseFloat(document.getElementById('cashReceived').value);
+            const orderTotal = getCurrentTotal();
+            const change = cashReceived - orderTotal;
+            
+            if (change >= 0) {
+                processPayment('cash', cashReceived, change);
+                closeCashPayment();
+            }
+        }
+
+        // Process card payment
+        function processCardPayment() {
+            if (currentOrder.length === 0) {
+                showNotification('Please add items to order first', 'error');
+                return;
+            }
+            
+            showNotification('Processing card payment...', 'info');
+            setTimeout(() => {
+                processPayment('card');
+            }, 2000);
+        }
+
+        // Process payment
+        function processPayment(method, cashReceived = 0, change = 0) {
+            const orderNumber = `ORD${String(orderCounter).padStart(3, '0')}`;
+            
+            if (method === 'cash') {
+                showNotification(`Payment successful! Change: ¥${change.toLocaleString()}`, 'success');
+            } else {
+                showNotification(`Card payment successful! Order ${orderNumber} completed.`, 'success');
+            }
+            
+            // Reset order
+            currentOrder = [];
+            orderCounter++;
+            document.getElementById('currentOrderNumber').textContent = orderNumber;
+            updateOrderDisplay();
+            
+            if (discountEnabled) {
+                toggleDiscount();
+            }
+        }
+
+        // Show notification
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <div class="notification-content">
+                    <span class="notification-icon">${type === 'success' ? '✅' : type === 'error' ? '❌' : 'ℹ️'}</span>
+                    <span class="notification-message">${message}</span>
+                </div>
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.classList.add('show');
+            }, 100);
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Initialize
+        window.onload = () => {
+            updateTime();
+            setInterval(updateTime, 1000);
+            updateOrderDisplay();
+        };
+    </script>
+</body>
+</html>

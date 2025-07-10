@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Owner Dashboard</title>
+    <link rel="stylesheet" href="owner-styles.css">
+</head>
+<body class="dashboard-body">
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">🍜</div>
+                <h3>MB HALAL WAGYU</h3>
+                <p>Owner Panel</p>
+            </div>
+            
+            <ul class="sidebar-menu">
+                <li class="menu-item active" onclick="showPage('overview')">
+                    <span class="icon">📊</span>
+                    <span>Overview</span>
+                </li>
+                <li class="menu-item" onclick="showPage('orders')">
+                    <span class="icon">🛒</span>
+                    <span>Orders</span>
+                </li>
+                <li class="menu-item" onclick="showPage('checkout')">
+                    <span class="icon">💳</span>
+                    <span>Checkout</span>
+                </li>
+            </ul>
+            
+            <div class="sidebar-footer">
+                <button class="logout-btn" onclick="logout()">
+                    <span class="icon">🚪</span>
+                    <span>Logout</span>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="dashboard-header">
+                <h1 id="page-title">Dashboard Overview</h1>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <input type="text" placeholder="Search..." class="search-input">
+                        <button class="search-btn">🔍</button>
+                    </div>
+                    <div class="user-info">
+                        <span>Welcome, Admin</span>
+                        <div class="user-avatar">👤</div>
+                    </div>
+                </div>
+            </header>
+
+            <div class="content-area" id="content-area">
+                <!-- Content will be loaded here -->
+            </div>
+        </main>
+    </div>
+
+    <script src="owner-script.js"></script>
+</body>
+</html>

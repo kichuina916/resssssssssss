@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3e7b3e">
+    <meta name="description" content="Experience authentic halal wagyu ramen and Asian cuisine at MB Halal Wagyu Ramen Restaurant">
+    <meta name="keywords" content="halal, wagyu, ramen, restaurant, asian cuisine, japanese food">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiMzZTdiM2UiLz4KPHN2ZyB4PSI0OCIgeT0iNDgiIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+CjxwYXRoIGQ9Im0xMiAzLTEuOTEyIDUuODEzYTIgMiAwIDAgMS0xLjI3NSAxLjI3NUwzIDEyIDguODEzIDEzLjkxMmEyIDIgMCAwIDEgMS4yNzUgMS4yNzVMMTIgMjEgMTMuOTEyIDE1LjE4N2EyIDIgMCAwIDEgMS4yNzUtMS4yNzVMMjEgMTIgMTUuMTg3IDEwLjA4OGEyIDIgMCAwIDEtMS4yNzUtMS4yNzVMMTIgMyIvPgo8L3N2Zz4KPC9zdmc+">
+    
+    <title>Restaurant Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+    <!-- Language Selection Modal -->
+    <div id="languageModal" class="modal">
+        <div class="modal-content language-modal">
+            <div class="language-header">
+                <div class="language-icon">🌍</div>
+                <h2 id="chooseLanguageText">Choose your language</h2>
+                <p class="language-subtitle">Select your preferred language for the best experience</p>
+            </div>
+            <div class="language-buttons">
+                <button class="language-btn" onclick="selectLanguage('en')">
+                    <div class="flag-container">
+                        <span class="flag">🇺🇸</span>
+                    </div>
+                    <div class="language-info">
+                        <span class="language-name">English</span>
+                        <span class="language-native">English</span>
+                    </div>
+                </button>
+                <button class="language-btn" onclick="selectLanguage('ja')">
+                    <div class="flag-container">
+                        <span class="flag">🇯🇵</span>
+                    </div>
+                    <div class="language-info">
+                        <span class="language-name">Japanese</span>
+                        <span class="language-native">日本語</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent" class="main-content hidden">
+        <div class="container">
+            <div class="hero-section">
+                <div class="restaurant-logo">🍜</div>
+                <h1 id="welcomeText">Welcome to Our Restaurant</h1>
+                <p class="hero-subtitle">Experience authentic flavors and exceptional service</p>
+            </div>
+            
+            <div class="main-buttons">
+                <button class="main-btn dine-in-btn" onclick="selectDineIn()">
+                    <span class="btn-icon">🍽️</span>
+                    <span id="dineInText">Dine In</span>
+                    <span class="btn-subtitle">Enjoy dining at our restaurant</span>
+                </button>
+                <button class="main-btn takeout-btn" onclick="selectTakeout()">
+                    <span class="btn-icon">🥡</span>
+                    <span id="takeoutText">Takeout</span>
+                    <span class="btn-subtitle">Order for pickup</span>
+                </button>
+            </div>
+
+            <!-- Feature Boxes -->
+            <div class="feature-boxes">
+                <div class="feature-box">
+                    <div class="feature-icon">✨</div>
+                    <h3>Authentic</h3>
+                    <p>Traditional recipes passed down through generations</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🥩</div>
+                    <h3>100% Halal</h3>
+                    <p>Certified halal ingredients and preparation methods</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🌱</div>
+                    <h3>Fresh Food</h3>
+                    <p>Daily fresh ingredients sourced from local farms</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Service</h3>
+                    <p>Quick preparation without compromising quality</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">👨‍🍳</div>
+                    <h3>Expert Chefs</h3>
+                    <p>Skilled chefs with years of culinary experience</p>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">💯</div>
+                    <h3>Quality Assured</h3>
+                    <p>Premium quality guaranteed in every dish</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Table Selection Modal -->
+    <div id="tableSelectionModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close" onclick="closeTableSelection()">&times;</span>
+            <h2 id="tableSelectionTitle">Select Your Table</h2>
+            <p class="table-subtitle">Please choose an available table number</p>
+            <div class="table-grid">
+                <!-- Table buttons will be generated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // Register service worker for PWA
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+    </script>
+</body>
+</html>

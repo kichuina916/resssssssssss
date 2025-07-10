@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3e7b3e">
+    <link rel="manifest" href="manifest.json">
+    <title>Menu - Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+    <div class="menu-container">
+        <!-- Category Navigation -->
+        <nav class="category-nav">
+            <div class="category-item active" onclick="showCategory('ramen')">
+                <img src="https://halalwagyuramen.jp/storage/91/conversions/Yukaris-Miso-Ramen5-thumb.jpg?height=60&width=60" alt="Ramen">
+                <span class="category-name">Ramen</span>
+            </div>
+            <div class="category-item" onclick="showCategory('wagyu-special')">
+                <img src="https://halalwagyuramen.jp/storage/97/conversions/13351-chicken-tortilla-soup-i-DDMFS-4x3-746173decf5548e581fd08e713a8adba-thumb.jpg?height=60&width=60" alt="Wagyu Special">
+                <span class="category-name">Wagyu Ramen Soup Special</span>
+            </div>
+            <div class="category-item" onclick="showCategory('wagyu-sukiyaki')">
+                <img src="https://halalwagyuramen.jp/storage/99/conversions/ALR-269606-carrot-ginger-soup-VAT-4x3-1closeup-29714cd6727c4befb83302234841aa31-thumb.jpg?height=60&width=60" alt="Wagyu Sukiyaki">
+                <span class="category-name">Wagyu Sukiyaki Rice Bowl</span>
+            </div>
+            <div class="category-item" onclick="showCategory('set-menu')">
+                <img src="https://halalwagyuramen.jp/storage/120/conversions/k_Photo_People_2022-05-AAPI-Month-Third-Culture_Raymum_K_AAPI_2022_Ramyun_003-thumb.jpeg?height=60&width=60" alt="Set Menu">
+                <span class="category-name">Set Menu</span>
+            </div>
+            <div class="category-item" onclick="showCategory('normal-rice')">
+                <img src="https://halalwagyuramen.jp/storage/109/conversions/how-to-cook-rice-thumb.jpg?height=60&width=60" alt="Normal Rice">
+                <span class="category-name">Normal Rice</span>
+            </div>
+            <div class="category-item" onclick="showCategory('juice')">
+                <img src="https://images.unsplash.com/photo-1613478223719-2ab802602423?w=60&h=60&fit=crop&crop=center" alt="Juice">
+                <span class="category-name">Juice</span>
+            </div>
+            <div class="category-item" onclick="showCategory('indonesian')">
+                <img src="https://halalwagyuramen.jp/images/item/thumb.png?height=60&width=60" alt="Indonesian">
+                <span class="category-name">Indonesian</span>
+            </div>
+            <div class="category-item" onclick="showCategory('single-item')">
+                <img src="https://halalwagyuramen.jp/storage/107/conversions/top_back2-thumb.jpg?height=60&width=60" alt="Single Item">
+                <span class="category-name">Single Item</span>
+            </div>
+        </nav>
+
+        <!-- Filter Buttons -->
+        <div class="filter-buttons">
+            <button class="filter-btn active" onclick="filterItems('all')">
+                <span>🍖</span> Non-Veg
+            </button>
+            <button class="filter-btn" onclick="filterItems('veg')">
+                <span>🥬</span> Veg
+            </button>
+        </div>
+
+        <!-- Menu Items -->
+        <div class="menu-section">
+            <h2 id="categoryTitle">Ramen</h2>
+            <div class="menu-grid" id="menuGrid">
+                <!-- Menu items will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Cart Button -->
+    <div class="floating-cart" onclick="openCart()" onmouseenter="showMiniCart()" onmouseleave="hideMiniCart()">
+        <span class="cart-icon">🛒</span>
+        <span class="cart-count" id="cartCount">0</span>
+        
+        <!-- Mini Cart Preview -->
+        <div id="miniCartPreview" class="mini-cart-preview">
+            <p>Cart is empty</p>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="modal hidden">
+        <div class="modal-content cart-modal">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2 id="cartTitle">Your Order</h2>
+            <div id="cartItems" class="cart-items"></div>
+            <div class="cart-total">
+                <h3>Total: ¥<span id="cartTotal">0</span></h3>
+            </div>
+            <button class="place-order-btn" onclick="confirmOrder()">Place Order</button>
+        </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div id="confirmModal" class="modal hidden">
+        <div class="modal-content confirm-modal">
+            <h2>Are you sure?</h2>
+            <p>Do you want to place this order?</p>
+            <div class="confirm-buttons">
+                <button class="confirm-btn" onclick="placeOrder()">Yes, Place Order</button>
+                <button class="cancel-btn" onclick="closeConfirm()">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="menu.js"></script>
+</body>
+</html>

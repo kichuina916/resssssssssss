@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3e7b3e">
+    <link rel="manifest" href="manifest.json">
+    <title>Order Success - Restaurant</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+    <!-- Dark Mode Toggle -->
+    <div class="success-container">
+        <div class="success-content">
+            <div class="success-icon">✅</div>
+            <h1 id="successTitle">Your order has been successfully created!</h1>
+            <div class="order-info">
+                <h2>Order Number: <span id="orderNumber"></span></h2>
+                <h3>Table Number: <span id="tableNumber"></span></h3>
+                <p>Estimated delivery time: <span id="deliveryTime">25-30 minutes</span></p>
+                
+                <div class="order-details">
+                    <h3 style="margin-bottom: 20px; color: #2c3e50;">Order Details:</h3>
+                    <div id="orderItemsList"></div>
+                    <div style="border-top: 2px solid #ff6b35; padding-top: 15px; margin-top: 15px;">
+                        <h3 style="color: #ff6b35;">Total: ¥<span id="orderTotal">0</span></h3>
+                    </div>
+                </div>
+            </div>
+            <div class="success-buttons">
+                <button class="btn-primary" onclick="goHome()">Back to Home</button>
+                <button class="btn-secondary" onclick="orderMore()">Add More</button>
+                <button class="btn-tertiary" onclick="showOrderHistory()">Order History</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Order History Modal -->
+    <div id="orderHistoryModal" class="modal hidden">
+        <div class="modal-content order-history-modal">
+            <span class="close" onclick="closeOrderHistory()">&times;</span>
+            <h2 id="orderHistoryTitle">Order History</h2>
+            <div class="order-search">
+                <div class="search-input-container">
+                    <span class="search-input-icon">🔍</span>
+                    <input type="text" id="orderNumberInput" placeholder="Enter your order number (e.g., ORD001)" class="order-input">
+                    <button onclick="searchOrder()" class="search-btn">
+                        <span class="search-icon">🔍</span>
+                        Search
+                    </button>
+                </div>
+            </div>
+            <div class="search-suggestions">
+                <h4>💡 Try these sample orders:</h4>
+                <div class="suggestion-tags">
+                    <span class="suggestion-tag" onclick="fillOrderNumber('ORD001')">ORD001</span>
+                    <span class="suggestion-tag" onclick="fillOrderNumber('ORD002')">ORD002</span>
+                    <span class="suggestion-tag" onclick="fillOrderNumber('ORD003')">ORD003</span>
+                </div>
+            </div>
+            <div id="orderDetails" class="order-details-result hidden"></div>
+        </div>
+    </div>
+
+    <script src="success.js"></script>
+</body>
+</html>

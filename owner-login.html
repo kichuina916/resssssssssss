@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Owner Login</title>
+    <link rel="stylesheet" href="owner-styles.css">
+</head>
+<body class="login-body">
+    <div class="login-container">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="restaurant-logo">🍜</div>
+                <h1>MB HALAL WAGYU RAMEN</h1>
+                <h2>Owner Dashboard</h2>
+            </div>
+            
+            <form class="login-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter your username">
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter your password">
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="remember">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">Login to Dashboard</button>
+            </form>
+            
+            <div class="login-footer">
+                <p>&copy; 2024 MB Halal Wagyu Ramen. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="owner-script.js"></script>
+</body>
+</html>
